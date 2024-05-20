@@ -20,4 +20,4 @@ COPY --from=build /app/target/comment-service.jar .
 
 EXPOSE 8080
 
-CMD [ "java", "-jar", "comment-service.jar"]
+CMD ["java","-jar","comment-service.jar"]

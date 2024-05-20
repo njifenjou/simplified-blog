@@ -20,4 +20,4 @@ COPY --from=build /app/target/post-service.jar .
 
 EXPOSE 8080
 
-CMD [ "java", "-jar", "post-service.jar"]
+CMD ["java","-jar","post-service.jar"]

@@ -20,4 +20,4 @@ COPY --from=build /app/target/auth-service.jar .
 
 EXPOSE 8080
 
-CMD [ "java", "-jar", "auth-service.jar"]
+CMD ["java","-jar","auth-service.jar"]
