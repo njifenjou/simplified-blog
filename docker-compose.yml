@@ -46,6 +46,11 @@ services:
       - POSTGRES_PASSWORD=user_pass
     volumes:
       - user_db_data:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8089:8080
   auth_service:
     build:
       context: ./auth-service
