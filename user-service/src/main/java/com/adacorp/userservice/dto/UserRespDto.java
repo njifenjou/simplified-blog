@@ -22,8 +22,7 @@ public class UserRespDto {
     private String login;
     private String email;
     private Genre genre;
-    private UUID userId;
-    private String password;
+
 
     public UserRespDto fromUser(User user){
         return UserRespDto.builder()
@@ -32,8 +31,6 @@ public class UserRespDto {
                 .email(user.getEmail())
                 .login(user.getLogin())
                 .genre(user.getGenre())
-                .userId(user.getUserId())
-                .password(user.getPassword())
                 .build();
     }
 }
