@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -22,6 +23,7 @@ public class UserRespDto {
     private String login;
     private String email;
     private Genre genre;
+    private LocalDate dateNaissance;
 
 
     public UserRespDto fromUser(User user){
@@ -31,6 +33,7 @@ public class UserRespDto {
                 .email(user.getEmail())
                 .login(user.getLogin())
                 .genre(user.getGenre())
+                .dateNaissance(user.getDateNaissance())
                 .build();
     }
 }

@@ -31,6 +31,7 @@ public class User {
     @Column(name = "motdepasse")
     private String password;
     private String email;
+    @Column(name = "date_naissance")
     private LocalDate dateNaissance;
     @Enumerated(EnumType.STRING)
     private Role role;

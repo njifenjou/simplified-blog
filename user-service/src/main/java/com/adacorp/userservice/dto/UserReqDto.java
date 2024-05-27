@@ -33,6 +33,7 @@ public User toUser(){
             .email(email)
             .role(role)
             .genre(genre)
+            .dateNaissance(dateNaissance)
             .build();
 }
 
