@@ -24,7 +24,33 @@ services:
       - POSTGRES_PASSWORD=comment_pass
     volumes:
       - comment_db_data:/var/lib/postgresql/data
-
+  post_db:
+    image: postgres:latest
+    container_name: post_db
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB=post_db
+      - POSTGRES_USER=post_user
+      - POSTGRES_PASSWORD=post_pass
+    volumes:
+      - post_db_data:/var/lib/postgresql/data
+  user_db:
+    image: postgres:latest
+    container_name: user_db
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_DB=user_db
+      - POSTGRES_USER=user_user
+      - POSTGRES_PASSWORD=user_pass
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8089:8080
   auth_service:
     build:
       context: ./auth-service
@@ -42,7 +68,24 @@ services:
       - "8083:8080"
     depends_on:
       - comment_db
-
+  post_service:
+    build:
+      context: ./post-service
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080"
+    depends_on:
+      - post_db
+  user_service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+    depends_on:
+      - user_db
 volumes:
   auth_db_data:
   comment_db_data:
+  post_db_data:
+  user_db_data:

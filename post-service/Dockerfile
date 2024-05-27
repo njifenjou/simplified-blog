@@ -9,15 +9,15 @@ COPY pom.xml .
 COPY src ./src
 
 # Construction du projet avec Maven
-RUN mvn clean package -DskipTests
+RUN mvn clean package -Dmaven.test.skip=true
 
 # Utilisation de l'image OpenJDK 17 comme base image pour l'execution du projet
 FROM adoptopenjdk
 
 WORKDIR /app
 
-COPY --from=build /app/target/auth-service.jar .
+COPY --from=build /app/target/post-service.jar .
 
 EXPOSE 8080
 
-CMD ["java","-jar","auth-service.jar"]
+CMD ["java","-jar","post-service.jar"]
