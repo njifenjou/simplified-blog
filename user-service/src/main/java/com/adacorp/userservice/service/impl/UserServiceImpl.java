@@ -23,11 +23,23 @@ public class UserServiceImpl implements UserServiceInterf {
 
     @Override
     public Map<String, Object> createUsers(UserReqDto userReqDto) {
-        User userExist = userRepository.findByLoginAndEmail((userReqDto.getLogin()), (userReqDto.getEmail()));
+        User userExist = userRepository.findByEmail(userReqDto.getEmail());
+       // User userExist1 = userRepository.findByLogin(userReqDto.getLogin());
         Map<String, Object> response = new HashMap<>();
+
         if (userExist != null) {
-            response.put("message", "user is already exist");
+        Boolean contains= userReqDto.toUser().getEmail().contains("[\\w.-]+@[\\w.-]+\\.[a-z]{2,} ");
+             if (contains = true) {
+
+              if (userExist.getEmail().equalsIgnoreCase(userReqDto.toUser().getEmail())) {
+                 response.put("message", "cet utilisateur existe déjà!");
+                 return response;
+             }
+
+            response.put("message", "mail non valide bien vouloir resaisir");
             return response;
+        }
+
         }
         UserRespDto userSaved = new UserRespDto().fromUser(userRepository.save(userReqDto.toUser()));
         response.put("message", "utilisateur enregistré!!!");
